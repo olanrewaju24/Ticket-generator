@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Your Ticket</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+    <div class="container">
+        <h2>Congrats, <span id="ticketUserName">...</span>!</h2>
+        <p>We've emailed your ticket to <span id="ticketUserEmail">...</span>.</p>
+
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <svg class="ticket-logo" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="..." />
+                </svg>
+                <span class="ticket-conf-name">Coding Conf</span>
+            </div>
+            <div class="text-sm text-gray-300 mb-4">Jan 31, 2025 / Austin, TX</div>
+
+            <img id="finalTicketAvatar" src="" class="ticket-avatar" alt="Avatar" />
+            <p id="finalTicketName" class="ticket-name"></p>
+            <p id="finalTicketGithub" class="ticket-github"></p>
+            <div id="ticketNumber" class="ticket-id"></div>
+        </div>
+    </div>
+
+    <script>
+        const data = JSON.parse(localStorage.getItem("ticketData"));
+
+        if (!data) {
+            document.body.innerHTML = "<h2>No ticket data found. Please go back and fill the form.</h2>";
+        } else {
+            document.getElementById("ticketUserName").textContent = data.name;
+            document.getElementById("ticketUserEmail").textContent = data.email;
+            document.getElementById("finalTicketName").textContent = data.name;
+            document.getElementById("finalTicketGithub").textContent = `@${data.github}`;
+            document.getElementById("ticketNumber").textContent = data.ticketId;
+            if (data.avatar) {
+                document.getElementById("finalTicketAvatar").src = data.avatar;
+            }
+        }
+    </script>
+</body>
+</html>
